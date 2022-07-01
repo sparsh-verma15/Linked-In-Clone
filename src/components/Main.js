@@ -26,6 +26,57 @@ const Main = (props) => {
             </button>
           </div>
         </ShareBox>
+        <div>
+          <Article>
+          <SharedActor>
+								<a>
+									<img src="/images/user.svg" alt="" />
+									<div>
+										<span>Title</span>
+										<span>Info</span>
+										<span>Date</span>
+									</div>
+								</a>
+								<button>
+									<img src="/images/ellipses.svg" alt="" />
+								</button>
+							</SharedActor>
+              <Description>
+                Description
+              </Description>
+              <SharedImg>
+              <a>
+                  <img src="/images/shared-image.jpg" alt=""/>
+                </a>
+              </SharedImg>
+              <SocialCounts> 
+                   <li>
+                        <span>80 Likes</span>
+										</li>
+										<li>
+											<a>&nbsp;&nbsp;&nbsp;&nbsp;2 comments</a>
+										</li>
+              </SocialCounts>
+              <SocialActions>
+								<button>
+                <img src="/images/like-icon.svg" alt="" />
+									<span>Like</span>
+								</button>
+								<button>
+									<img src="/images/comment-icon.svg" alt="" />
+									<span>Comment</span>
+								</button>
+								<button>
+									<img src="/images/share-icon.svg" alt="" />
+									<span>Share</span>
+								</button>
+								<button>
+									<img src="/images/send-icon.svg" alt="" />
+									<span>Send</span>
+								</button>
+							</SocialActions>
+          </Article>
+        </div>
     </Container>);
 };
 
@@ -90,6 +141,135 @@ const ShareBox = styled(CommonCard)`
 					margin: 0 4px 0 -2px;
 				}
 			}
+		}
+	}
+`;
+
+const Article = styled(CommonCard)`
+  padding: 0;
+  margin: 0 0 8px;
+  overflow: visible;
+`
+
+const SharedActor = styled.div`
+	padding-right: 40px;
+	flex-wrap: nowrap;
+	padding: 12px 16px 0;
+	margin-bottom: 8px;
+	display: flex;
+	align-items: center;
+	a {
+		margin-right: 12px;
+		flex-grow: 1;
+		overflow: hidden;
+		display: flex;
+		img {
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+		}
+		& > div {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+			flex-basis: 0;
+			margin-left: 8px;
+			overflow: hidden;
+			span {
+				text-align: left;
+				&:first-child {
+					font-size: 14px;
+					font-weight: 700;
+					color: #000;
+				}
+				&:nth-child(n + 2) {
+					font-size: 12px;
+					color: rgba(0, 0, 0, 0.6);
+				}
+			}
+		}
+	}
+	button {
+		position: absolute;
+		top: 0;
+		right: 12px;
+		border: none;
+		outline: none;
+		background: transparent;
+	}
+`;
+
+const Description = styled.div`
+	padding: 0 16px;
+	overflow: hidden;
+  color: rgba(0,0,0,0.9);
+	font-size: 14px;
+	text-align: left;
+`;
+const SharedImg = styled.div`
+	margin-top:8px;
+  width:100%;
+  display: block;
+  position:relative;
+  background-color:#f9fafb;
+  img {
+    object-fit:contain;
+    width:100%;
+    height:100%;
+  }
+`;
+
+const SocialCounts = styled.ul`
+	line-height: 1.3;
+	display: flex;
+	align-items: flex-start;
+	overflow: auto;
+	margin: 0 16px;
+	padding: 8px 0;
+	border-bottom: 1px solid #e9efdf;
+	color: rgba(0, 0, 0, 0.6);
+	list-style: none;
+	li {
+		margin-right: 5px;
+		font-size: 12px;
+		button {
+			display: flex;
+			border: none;
+			color: rgba(0, 0, 0, 0.6);
+			background: transparent;
+			span {
+				padding-left: 5px;
+			}
+		}
+	}
+`;
+
+const SocialActions = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin: 4px 12px;
+	min-height: 40px;
+	padding-bottom: 5px;
+	button {
+		display: inline-flex;
+		align-items: center;
+		padding: 8px;
+		border: none;
+		background: transparent;
+		span {
+			margin-left: 4px;
+			color: rgba(0, 0, 0, 0.6);
+			font-size: 14px;
+		}
+	}
+	button.active {
+		span {
+			color: #0a66c2;
+			font-weight: 600;
+		}
+		svg {
+			fill: #0a66c2;
 		}
 	}
 `;
