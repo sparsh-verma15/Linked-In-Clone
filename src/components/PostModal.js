@@ -3,6 +3,17 @@ import { useState } from "react";
 
 const PostModal = (props) => {
 	const [editorText,setEditorText] = useState("");
+	const [shareImage,setShareImage] = useState("");
+
+	const handleChange = (e) => {
+		const image = e.target.files[0];
+
+		if(image === "" || image===undefined){
+			alert(`This is a ${typeof image} file, please select an Image file.`);
+			return;
+		}
+		setShareImage(image);
+	}
 
 	const reset = () => {
 		setEditorText("");
@@ -24,11 +35,21 @@ const PostModal = (props) => {
 								<img src="/images/user.svg" alt=""/>
                                 <span>Name</span>
 							</UserInfo>
-							<Editor><textarea value={editorText} 
+							<Editor>
+								<textarea value={editorText} 
 								onChange={(e)=>setEditorText(e.target.value)} 
 								placeholder="What do you want to post?"
-								autoFocus={true}>
-							</textarea>
+								autoFocus={true}/>
+								<UploadImage>
+									<input type="file" accept="image/gif, image/jpeg, image/png, image/jpg"
+										name = "image" id="file" style={{display:"none"}}
+										onChange={handleChange}
+									/>
+									<p>
+										<label htmlFor="file" className="btnStyle">Select an image to share</label>
+									</p>
+									{shareImage && <img src={URL.createObjectURL(shareImage)} alt="" />}
+								</UploadImage>
 							</Editor>
 						</SharedContent>
 						<ShareCreation>
@@ -44,7 +65,7 @@ const PostModal = (props) => {
                                         <img src="/images/share-comment.svg" alt=""/>
                                     </AssetButton>
                                 </ShareComment>
-                                <PostButton>Post</PostButton>
+                                <PostButton disabled={!editorText?true:false}>Post</PostButton>
                             </AttachAssets>
 						</ShareCreation>
 					</Content>
@@ -208,11 +229,44 @@ const Editor = styled.div`
 `;
 
 const UploadImage = styled.div`
-	text-align: center;
+
+	.btnStyle {
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+  width:100%;
+	}
 	img {
 		width: 100%;
 	}
+	
 `;
 
 
 export default PostModal;
+
