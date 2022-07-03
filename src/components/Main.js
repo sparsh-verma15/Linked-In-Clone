@@ -1,11 +1,29 @@
+import { useState } from "react";
 import styled from "styled-components";
+import PostModal from "./PostModal"; 
 
 const Main = (props) => {
+	
+	const [showModal,setShowModal] = useState(false);
+
+	const clickHandler = (event) => {
+		switch(showModal){
+			case false:
+				setShowModal(true);
+				break;
+			case true:
+				setShowModal(false);
+				break;
+			default:
+				setShowModal(false);
+		}
+	}
+
   return(<Container>
         <ShareBox>
           <div>
             <img src="/images/user.svg" alt=""/>
-            <button>Start a Post</button>
+            <button onClick={clickHandler}>Click Here to Start a Post</button>
           </div>
           <div>
             <button>
@@ -76,6 +94,7 @@ const Main = (props) => {
 								</button>
 							</SocialActions>
           </Article>
+		  <PostModal showModal={showModal} clickHandler = {clickHandler}/>
         </div>
     </Container>);
 };
