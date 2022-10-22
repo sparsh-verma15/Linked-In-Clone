@@ -15,8 +15,8 @@ const Login = (props) => {
           <img src="/images/login-logo.svg" alt="" />
         </a>
         <div>
-          <Join>Join now</Join>
-          <SignIn>Sign in</SignIn>
+          {/* <Join>Join now</Join>
+          <SignIn>Sign in</SignIn> */}
         </div>
       </Nav>
       <Section>
@@ -27,7 +27,7 @@ const Login = (props) => {
         <Form>
           <Google onClick={() => props.signIn()}>
             <img src="/images/google.svg" alt="" />
-            Sign in with Google
+            &nbsp;Sign in
           </Google>
         </Form>
       </Section>

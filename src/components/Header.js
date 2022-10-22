@@ -42,14 +42,14 @@ const Header = (props) => {
               </a>
             </NavList>
 
-            <NavList>
+            <NavList className="hideOnMobi">
               <a>
                 <img src="/images/nav-messaging.svg" alt="" />
                 <span>Messaging</span>
               </a>
             </NavList>
 
-            <NavList>
+            <NavList className="hideOnMobi">
               <a>
                 <img src="/images/nav-notifications.svg" alt="" />
                 <span>Notifications</span>
@@ -168,7 +168,6 @@ const NavListWrap = styled.ul`
   display: flex;
   flex-wrap: nowrap;
   list-style-type: none;
-
   .active {
     span:after {
       content: "";
@@ -180,6 +179,12 @@ const NavListWrap = styled.ul`
       transition: transform 0.2s ease-in-out;
       width: 100%;
       border-color: rgba(0, 0, 0, 0.9);
+    }
+  }
+
+  .hideOnMobi {
+    @media (max-width : 768px){
+      display: none;
     }
   }
 `;
