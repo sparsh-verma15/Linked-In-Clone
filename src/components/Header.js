@@ -1,6 +1,4 @@
-import { connect } from "react-redux";
 import styled from "styled-components";
-import { signOutAPI } from "../actions"
 
 const Header = (props) => {
   return (
@@ -42,14 +40,14 @@ const Header = (props) => {
               </a>
             </NavList>
 
-            <NavList className="hideOnMobi">
+            <NavList>
               <a>
                 <img src="/images/nav-messaging.svg" alt="" />
                 <span>Messaging</span>
               </a>
             </NavList>
 
-            <NavList className="hideOnMobi">
+            <NavList>
               <a>
                 <img src="/images/nav-notifications.svg" alt="" />
                 <span>Notifications</span>
@@ -58,19 +56,13 @@ const Header = (props) => {
 
             <User>
               <a>
-              { props.user && props.user.photoURL ? 
-                (<img src={props.user.photoURL} alt="" />) 
-                : 
-                (<img src="/images/user.svg" alt="" />)
-                }
-                <span>
-                  Me
-                  <img src="/images/down-icon.svg" alt="" />
-                </span>
+                <img src="/images/user.svg" alt="" />
+                <span>Me</span>
+                <img src="/images/down-icon.svg" alt="" />
               </a>
 
-              <SignOut onClick={()=>props.signOut()}>
-                <a className="signOutText">Sign Out</a>
+              <SignOut>
+                <a>Sign Out</a>
               </SignOut>
             </User>
 
@@ -168,6 +160,7 @@ const NavListWrap = styled.ul`
   display: flex;
   flex-wrap: nowrap;
   list-style-type: none;
+
   .active {
     span:after {
       content: "";
@@ -181,17 +174,10 @@ const NavListWrap = styled.ul`
       border-color: rgba(0, 0, 0, 0.9);
     }
   }
-
-  .hideOnMobi {
-    @media (max-width : 768px){
-      display: none;
-    }
-  }
 `;
 
 const NavList = styled.li`
   display: flex;
-  cursor: pointer;
   align-items: center;
   a {
     align-items: center;
@@ -239,8 +225,6 @@ const SignOut = styled.div`
   transition-duration: 167ms;
   text-align: center;
   display: none;
-
- 
 `;
 
 const User = styled(NavList)`
@@ -265,8 +249,6 @@ const User = styled(NavList)`
       align-items: center;
       display: flex;
       justify-content: center;
-      
-      cursor: pointer;
     }
   }
 `;
@@ -275,15 +257,4 @@ const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
 
-
-const mapStateToProps = (state) => {
-  return {
-    user : state.userState.user ,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  signOut : () => dispatch(signOutAPI()),
-});
-
-export default connect(mapStateToProps,mapDispatchToProps)(Header);
+export default Header;
